@@ -19,6 +19,14 @@ private:
     std::mt19937 gen{std::random_device{}()};
 
 
+    void spawnNextPipe() {
+        float xPos = m_pipes.back().getX() + 450.0f;
+        float pipeHeight = static_cast<float>(distr(gen));
+        float gapHeight = 300.0f;
+
+        m_pipes.emplace_back(xPos, pipeHeight, gapHeight, windowHeight);
+    }
+
     void spawnInitialPipes() {
         for (int i = 0; i < 5; ++i) {
             float xPos = windowWidth + (i * 450.0f);
@@ -33,6 +41,9 @@ public:
     PipeHandler(float windowWidth, float windowHeight)
         : windowWidth(windowWidth), windowHeight(windowHeight),distr(100,250)
     {
+
+
+    }
 
 
     }
@@ -58,6 +69,12 @@ public:
         for (auto& pipe : m_pipes) {
             pipe.move(-pipeSpeed * deltaTime, 0.0f);
         }
+
+        while(m_pipes.size() > 0 && m_pipes[0].getX() + 80 < 0) {
+            m_pipes.erase(m_pipes.begin());
+            spawnNextPipe();
+        }
+
         if(hasSpawnedInitial){
             float c_speed  = pipeSpeed;
            c_speed = movement(c_speed,deltaTime);
