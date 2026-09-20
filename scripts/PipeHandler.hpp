@@ -14,6 +14,7 @@ private:
     float startTimer = 0.0f;
     float startDelay = 3.0f; 
     bool hasSpawnedInitial = false;
+    int score = 0;
 
     std::uniform_int_distribution <int> distr;
     std::mt19937 gen{std::random_device{}()};
@@ -49,6 +50,9 @@ public:
 
         for (auto& pipe : m_pipes) {
             pipe.move(-pipeSpeed * deltaTime, 0.0f);
+            if (pipe.markPassed(windowWidth / 4.0f)) {
+                ++score;
+            }
         }
         if(hasSpawnedInitial){
             float c_speed  = pipeSpeed;
@@ -70,5 +74,9 @@ public:
             }
         }
         return false;
+    }
+
+    int getScore() const {
+        return score;
     }
 };
