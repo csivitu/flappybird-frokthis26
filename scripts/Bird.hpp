@@ -66,9 +66,9 @@ public:
 
 float moves(float pace, float deltaTime){
 
-    pace -= 2*5.0f*deltaTime;
-        if (pace < 0){
-            pace=0.5;
+    pace += 2*5.0f*deltaTime;
+        if (pace > 450.0f){
+            pace=450.0f;
         }
 
     return pace;
