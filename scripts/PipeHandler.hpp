@@ -33,8 +33,14 @@ public:
     PipeHandler(float windowWidth, float windowHeight) 
         : windowWidth(windowWidth), windowHeight(windowHeight),distr(100,250)
     {
-        
-        
+     int countPassed(float birdX) const {
+        int passed = 0;
+        for (const auto& pipe : m_pipes) {
+            if (pipe.getX() + 80.0f < birdX) {
+                passed++;
+            }
+        }
+        return passed;}   
     }
 
     void update(float deltaTime) {
