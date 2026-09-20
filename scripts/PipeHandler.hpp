@@ -12,7 +12,7 @@ private:
     float windowHeight;
 
     float startTimer = 0.0f;
-    float startDelay = 3.0f; 
+    float startDelay = 3.0f;
     bool hasSpawnedInitial = false;
 
     std::uniform_int_distribution <int> distr;
@@ -30,13 +30,21 @@ private:
     }
 
 public:
-    PipeHandler(float windowWidth, float windowHeight) 
+    PipeHandler(float windowWidth, float windowHeight)
         : windowWidth(windowWidth), windowHeight(windowHeight),distr(100,250)
     {
-        
-        
-    }
 
+
+    }
+    int countPassed(float birdX) {
+        int n = 0;
+        for(int i =0; i < (int)m_pipes.size();i++) {
+            if(m_pipes[i].getX() + 80<birdX) {
+                n = n+1;
+            }
+        }
+        return n;
+    }
     void update(float deltaTime) {
         if (!hasSpawnedInitial) {
             startTimer += deltaTime;
@@ -44,7 +52,7 @@ public:
                 spawnInitialPipes();
                 hasSpawnedInitial = true;
             }
-            return; 
+            return;
         }
 
         for (auto& pipe : m_pipes) {
