@@ -60,7 +60,11 @@ public:
     }
 
     sf::FloatRect getBounds() const {
-        return sprite.getGlobalBounds();
+        float size = 53.0f;
+        float half = size / 2.0f;
+        float centerX = sprite.getPosition().x;
+        float centerY = sprite.getPosition().y;
+        return sf::FloatRect(centerX - half, centerY - half, size, size);
     }
 };
 
