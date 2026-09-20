@@ -60,7 +60,12 @@ public:
     }
 
     sf::FloatRect getBounds() const {
-        return sprite.getGlobalBounds();
+        sf::FloatRect bounds = sprite.getGlobalBounds();
+        bounds.left += bounds.width * 0.15f;
+        bounds.top += bounds.height * 0.15f;
+        bounds.width *= 0.7f;
+        bounds.height *= 0.7f;
+        return bounds;
     }
 };
 
