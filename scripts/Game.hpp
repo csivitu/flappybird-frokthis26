@@ -107,6 +107,8 @@ private:
         pipe_handler.update(deltaTime);
 
         sf::FloatRect birdBounds = flappy.getBounds();
+        int score = pipe_handler.countPassed(birdBounds.left);
+        scoreText.setString("Score:" + std::to_string(score));
 
 
          bool hitPipe = pipe_handler.checkAnyCollision(birdBounds);
