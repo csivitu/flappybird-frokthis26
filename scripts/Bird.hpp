@@ -13,7 +13,6 @@ private:
     float vel = 0.0f;
     float gravity = -1200.0f;
     float accel = 0.0f;
-
 public:
     bird(float windowWidth, float windowHeight) {
         if (!texture.loadFromFile("assets/spaceship.png")) {
@@ -60,7 +59,14 @@ public:
     }
 
     sf::FloatRect getBounds() const {
-        return sprite.getGlobalBounds();
+        float size= 53.0f;
+        float half= 26.5f;
+        float centerX= sprite.getPosition().x;
+        float centerY= sprite.getPosition().y;
+        float left= centerX-half;
+        float top= centerY-half;
+        sf::FloatRect box(left, top, size, size);
+        return box;
     }
 };
 
