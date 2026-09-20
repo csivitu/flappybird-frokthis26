@@ -37,7 +37,7 @@ public:
     void flap() {
         if (vel <= gravity / 10.0f) {
             accel = 0.0f;
-            vel = -gravity / 4.0f;
+            vel = gravity / 4.0f;
         }
     }
 
