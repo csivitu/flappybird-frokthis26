@@ -6,6 +6,7 @@ class Pipe {
 private:
     sf::RectangleShape topPipe;
     sf::RectangleShape bottomPipe;
+    bool scoreAwarded = false;
 
 public:
     Pipe(float xPos, float pipeHeight, float gapHeight, float windowHeight) {
@@ -35,6 +36,14 @@ public:
 
     float getX() const {
         return topPipe.getPosition().x;
+    }
+
+    bool markPassed(float birdX) {
+        if (!scoreAwarded && getX() + topPipe.getSize().x < birdX) {
+            scoreAwarded = true;
+            return true;
+        }
+        return false;
     }
 };
 

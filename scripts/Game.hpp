@@ -1,4 +1,5 @@
 #include <iostream>
+#include <string>
 #include <SFML/Audio.hpp>
 #include <SFML/Graphics.hpp>
 #include "Bird.hpp"
@@ -54,6 +55,7 @@ private:
             case GameState::Playing:
                 pipe_handler.draw(game_window);
                 flappy.draw(game_window);
+                scoreText.setString("Score: " + std::to_string(pipe_handler.getScore()));
                 game_window.draw(scoreText);
                 break;
 
