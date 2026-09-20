@@ -41,7 +41,5 @@ public:
 float movement(float speed,float deltaTime){
 
     speed= speed + 5.0f*deltaTime;
-    speed = moves(speed, deltaTime);
-
     return speed;
 }
