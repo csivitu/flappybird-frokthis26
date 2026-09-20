@@ -19,7 +19,7 @@ private:
 
     float windowWidth = 800.0f;
     float windowHeight = 600.0f;
-     
+
     sf::SoundBuffer bgmBuffer;
     sf::Sound bgmSound;
 
@@ -36,7 +36,7 @@ private:
     GameState currentState = GameState::Menu;
 
     void reset() {
-       
+
         flappy = bird(windowWidth, windowHeight);
         pipe_handler = PipeHandler(windowWidth, windowHeight);
         game_clock.restart();
@@ -84,14 +84,14 @@ private:
                     if (event.key.code == sf::Keyboard::Space) {
                         currentState = GameState::Playing;
                     }
-                } 
+                }
                 else if (currentState == GameState::Playing) {
                     if (event.key.code == sf::Keyboard::Space) {
                         flappy.flap();
                     }
-                } 
+                }
                 else if (currentState == GameState::GameOver) {
-                    
+
                     if (event.key.code == sf::Keyboard::Space) {
                         reset();
                         currentState = GameState::Playing;
@@ -102,15 +102,18 @@ private:
     }
 
     void update(float deltaTime) {
+
         flappy.update(deltaTime);
         pipe_handler.update(deltaTime);
 
         sf::FloatRect birdBounds = flappy.getBounds();
+        int score = pipe_handler.countPassed(birdBounds.left);
+        scoreText.setString("Score:" + std::to_string(score));
 
-    
+
          bool hitPipe = pipe_handler.checkAnyCollision(birdBounds);
 
-    
+
         bool hitGround = (birdBounds.top + birdBounds.height) >= windowHeight;
         bool hitCeiling = birdBounds.top <= 0.0f;
 
@@ -132,7 +135,7 @@ private:
         sf::FloatRect startBounds = startText.getLocalBounds();
         startText.setOrigin(startBounds.left + startBounds.width / 2.0f,startBounds.top + startBounds.height / 2.0f);
         startText.setPosition(windowWidth / 2.0f, windowHeight / 2.0f);
-        
+
         gameOverText.setFont(font);
         gameOverText.setString("GAME OVER\nPress SPACE to restart or ESC to exit");
         gameOverText.setCharacterSize(32);
@@ -149,14 +152,14 @@ private:
         scoreText.setOrigin(scoreBounds.left + scoreBounds.width / 2.0f,scoreBounds.top + scoreBounds.height / 2.0f);
         scoreText.setPosition(windowWidth-50, 20);
 
-        
+
     }
 
 public:
-    Game() 
+    Game()
         : game_window(sf::VideoMode({ 800,600 }), "Flappy flappy"),
           flappy(windowWidth, windowHeight),
-          pipe_handler(windowWidth, windowHeight) 
+          pipe_handler(windowWidth, windowHeight)
     {
 
         game_window.setVerticalSyncEnabled(true);
@@ -184,7 +187,7 @@ public:
     void run() {
         while (game_window.isOpen()) {
             float deltaTime = game_clock.restart().asSeconds();
-            
+
             player_input();
 
             if (currentState == GameState::Playing) {
