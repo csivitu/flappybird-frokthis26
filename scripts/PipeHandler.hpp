@@ -45,8 +45,6 @@ public:
 
     }
 
-
-    }
     int countPassed(float birdX) {
         int n = 0;
         for(int i =0; i < (int)m_pipes.size();i++) {
