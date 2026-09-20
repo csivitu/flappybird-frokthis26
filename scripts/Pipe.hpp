@@ -36,6 +36,10 @@ public:
     float getX() const {
         return topPipe.getPosition().x;
     }
+
+    float getWidth() const {
+        return topPipe.getSize().x;
+    }
 };
 
 float movement(float speed,float deltaTime){
