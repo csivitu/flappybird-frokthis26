@@ -11,7 +11,7 @@ private:
     sf::Sprite sprite;
 
     float vel = 0.0f;
-    float gravity = -1200.0f;
+    float gravity = 1200.0f;
     float accel = 0.0f;
 
 public:
@@ -33,18 +33,16 @@ public:
     void draw(sf::RenderWindow& window) {
         window.draw(sprite);
     }
-
     void flap() {
-        if (vel <= gravity / 10.0f) {
+        if (vel >= gravity / 10.0f) {
             accel = 0.0f;
             vel = -gravity / 4.0f;
         }
     }
-
     void update(float deltaTime) {
         accel += gravity * deltaTime;
 
-        if (accel <= gravity) {
+        if (accel >= gravity) {
             accel = gravity;
         }
 
