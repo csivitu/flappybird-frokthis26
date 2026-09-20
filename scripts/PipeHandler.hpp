@@ -18,6 +18,13 @@ private:
     std::uniform_int_distribution <int> distr;
     std::mt19937 gen{std::random_device{}()};
 
+    void spawnNextPipe() {
+        float xPos = m_pipes.back().getX() + 450.0f;
+        float pipeHeight = static_cast<float>(distr(gen));
+        float gapHeight = 300.0f;
+
+        m_pipes.emplace_back(xPos, pipeHeight, gapHeight, windowHeight);
+    }
 
     void spawnInitialPipes() {
         for (int i = 0; i < 5; ++i) {
@@ -62,6 +69,15 @@ public:
             pipe.draw(window);
         }
     }
+        void spawnNextPipe() {
+        float xPos = m_pipes.back().getX() + 450.0f;
+        float pipeHeight = static_cast<float>(distr(gen));
+        float gapHeight = 300.0f;
+
+        m_pipes.emplace_back(xPos, pipeHeight, gapHeight, windowHeight);
+    }
+    
+
 
     bool checkAnyCollision(const sf::FloatRect& birdBounds) const {
         for (const auto& pipe : m_pipes) {
